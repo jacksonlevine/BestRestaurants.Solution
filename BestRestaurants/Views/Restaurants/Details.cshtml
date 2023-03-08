@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BestRestaurants.Models.Restaurant
+@using BestRestaurants.Models
+
+<h2>Restaurant Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
+
+@if (@Model.Cuisines.Count == 0)
+{
+  <h3>No cuisines have been added to this restaurant yet!</h3>
+} 
+else
+{
+  <h3>Cuisines:</h3>
+  <ul>
+    @foreach (Cuisine cuisine in Model.Cuisines)
+    {
+      <li>@Html.ActionLink($"{cuisine.Description}", "Details", "Cuisines", new { id = cuisine.CuisineId })</li>
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.RestaurantId })</p>
+<p>@Html.ActionLink("Delete Restaurant", "Delete", new { id = Model.RestaurantId })</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>
